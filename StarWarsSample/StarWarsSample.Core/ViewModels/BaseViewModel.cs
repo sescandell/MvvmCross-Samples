@@ -25,6 +25,11 @@ namespace StarWarsSample.Core.ViewModels
         {
         }
 
+        public override void Prepare(TParameter parameter)
+        {
+            // Override it if you want :)
+        }
+
         /// <summary>
         /// Gets the internationalized string at the given <paramref name="index"/>, which is the key of the resource.
         /// </summary>

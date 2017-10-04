@@ -6,14 +6,14 @@ using Android.Support.Design.Widget;
 using Android.Support.Graphics.Drawable;
 using Android.Views;
 using MvvmCross.Binding.Droid.BindingContext;
-using MvvmCross.Droid.Shared.Attributes;
 using MvvmCross.Droid.Support.V4;
 using StarWarsSample.Core.Resources;
 using StarWarsSample.Core.ViewModels;
+using MvvmCross.Droid.Views.Attributes;
 
 namespace StarWarsSample.Droid.Views
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.navigation_frame)]
+    [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.navigation_frame)]
     [Register("starWarsSample.droid.views.MenuView")]
     public class MenuFragment : MvxFragment<MenuViewModel>, NavigationView.IOnNavigationItemSelectedListener
     {
@@ -57,7 +57,9 @@ namespace StarWarsSample.Droid.Views
         public bool OnNavigationItemSelected(IMenuItem item)
         {
             if (_previousMenuItem != null)
+            {
                 _previousMenuItem.SetChecked(false);
+            }
 
             item.SetCheckable(true);
             item.SetChecked(true);

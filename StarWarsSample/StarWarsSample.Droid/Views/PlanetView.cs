@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -8,7 +7,7 @@ using Android.Widget;
 using Com.Airbnb.Lottie;
 using MvvmCross.Binding.BindingContext;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Droid.Shared.Attributes;
+using MvvmCross.Droid.Views.Attributes;
 using MvvmCross.Platform.Core;
 using MvvmCross.Plugins.Color.Droid;
 using StarWarsSample.Core;
@@ -17,7 +16,7 @@ using StarWarsSample.Core.ViewModels;
 
 namespace StarWarsSample.Droid.Views
 {
-    [MvxFragment(typeof(MainViewModel), Resource.Id.content_frame, true)]
+    [MvxFragmentPresentation(typeof(MainViewModel), Resource.Id.content_frame, true)]
     [Register("starWarsSample.droid.views.PlanetView")]
     public class PlanetView : BaseFragment<PlanetViewModel>, Animator.IAnimatorListener
     {

@@ -37,7 +37,7 @@ namespace StarWarsSample.Core.Rest.Implementations
                     {
                         response = await httpClient.SendAsync(request).ConfigureAwait(false);
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                         // log error
                     }

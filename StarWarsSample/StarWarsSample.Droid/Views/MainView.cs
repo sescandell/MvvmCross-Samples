@@ -1,5 +1,4 @@
-﻿using System;
-using Acr.UserDialogs;
+﻿using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.Support.V4.View;
@@ -7,16 +6,18 @@ using Android.Support.V4.Widget;
 using Android.Views;
 using Android.Views.InputMethods;
 using MvvmCross.Droid.Support.V7.AppCompat;
+using MvvmCross.Droid.Views.Attributes;
 using StarWarsSample.Core.ViewModels;
 
 namespace StarWarsSample.Droid.Views
 {
+    [MvxActivityPresentation]
     [Activity(Label = "Star Wars",
         Theme = "@style/AppTheme",
         LaunchMode = LaunchMode.SingleTop,
         Name = "starWarsSample.droid.views.MainView"
         )]
-    public class MainView : MvxCachingFragmentCompatActivity<MainViewModel>
+    public class MainView : MvxAppCompatActivity<MainViewModel>
     {
         public DrawerLayout DrawerLayout { get; set; }
 

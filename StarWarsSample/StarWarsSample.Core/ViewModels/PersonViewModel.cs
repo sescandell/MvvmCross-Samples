@@ -4,27 +4,29 @@ using MvvmCross.Core.ViewModels;
 using StarWarsSample.Core.Models;
 using StarWarsSample.Core.MvxInteraction;
 using StarWarsSample.Core.ViewModelResults;
+using MvvmCross.Core.Navigation;
 
 namespace StarWarsSample.Core.ViewModels
 {
     public class PersonViewModel : BaseViewModel<Person, DestructionResult<Person>>
     {
         private readonly IUserDialogs _userDialogs;
+        private readonly IMvxNavigationService _navigationService;
 
         public PersonViewModel(
-            IUserDialogs userDialogs)
+            IUserDialogs userDialogs,
+            IMvxNavigationService navigationService)
         {
             _userDialogs = userDialogs;
+            _navigationService = navigationService;
 
             DestroyPersonCommand = new MvxAsyncCommand(DestroyPerson);
         }
 
         // MvvmCross Lifecycle
-        public override Task Initialize(Person parameter)
+        public override void Prepare(Person parameter)
         {
             Person = parameter;
-
-            return Task.FromResult(0);
         }
 
         // MVVM Properties
@@ -64,7 +66,7 @@ namespace StarWarsSample.Core.ViewModels
 
             var request = new DestructionAction
             {
-                OnDestroyed = () => Close(
+                OnDestroyed = () => _navigationService.Close(this, 
                     new DestructionResult<Person>
                     {
                         Entity = Person,

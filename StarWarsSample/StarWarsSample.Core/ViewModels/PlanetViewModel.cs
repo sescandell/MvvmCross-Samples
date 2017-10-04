@@ -5,27 +5,29 @@ using MvvmCross.Core.ViewModels;
 using StarWarsSample.Core.Models;
 using StarWarsSample.Core.MvxInteraction;
 using StarWarsSample.Core.ViewModelResults;
+using MvvmCross.Core.Navigation;
 
 namespace StarWarsSample.Core.ViewModels
 {
     public class PlanetViewModel : BaseViewModel<Planet, DestructionResult<Planet>>
     {
         private readonly IUserDialogs _userDialogs;
+        private readonly IMvxNavigationService _navigationService;
 
         public PlanetViewModel(
-            IUserDialogs userDialogs)
+            IUserDialogs userDialogs,
+            IMvxNavigationService navigationService)
         {
             _userDialogs = userDialogs;
+            _navigationService = navigationService;
 
             DestroyPlanetCommand = new MvxAsyncCommand(DestroyPlanet);
         }
 
-        // MvvmCross Lifecycle
-        public override Task Initialize(Planet parameter)
+        // MVVM Lifecycle
+        public override void Prepare(Planet planet)
         {
-            Planet = parameter;
-
-            return Task.FromResult(0);
+            Planet = planet;
         }
 
         // MVVM Properties
@@ -64,7 +66,7 @@ namespace StarWarsSample.Core.ViewModels
 
             var request = new DestructionAction
             {
-                OnDestroyed = () => Close(new DestructionResult<Planet> { Entity = Planet, Destroyed = true })
+                OnDestroyed = () => _navigationService.Close(this, new DestructionResult<Planet> { Entity = Planet, Destroyed = true })
             };
 
             Interaction.Raise(request);
